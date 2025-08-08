@@ -1,0 +1,29 @@
+name: mercadodegols
+description: Mercado dos gols - Flutter Web App
+publish_to: 'none' # projeto privado, não publicar no pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.18.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  firebase_core: ^3.13.0
+  cloud_firestore: ^5.6.6
+  firebase_auth: ^5.5.4
+  firebase_ui_auth: ^1.1.0   # For the pre-built Authentication UI
+  firebase_ui_oauth_google: ^1.3.0
+  google_sign_in: ^6.2.1 # Needed for Google Sign-In
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
