@@ -3,31 +3,30 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart'; // Importe para usar Cloud Functions
+import 'package:flutter/foundation.dart'; // Para kDebugMode
 
 // Certifique-se de ter suas DefaultFirebaseOptions.
-// import 'firebase_options.dart'; // Se você usa firebase_core configurado
+import 'firebase_options.dart'; // Se você usa firebase_core configurado
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-      // options: DefaultFirebaseOptions.currentPlatform, // Descomente se você estiver usando isso para produção
+      options: DefaultFirebaseOptions.currentPlatform, // Descomente se você estiver usando isso para produção
   );
 
-  // --- CONFIGURAÇÃO PARA OS EMULADORES ---
-  // Para Authentication
-  await FirebaseAuth.instance.useAuthEmulator('localhost', 9099); // Porta padrão do Auth Emulator
-
-  // Para Firestore
-  FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080); // Porta padrão do Firestore Emulator
-
-  // Para Cloud Functions
-  FirebaseFunctions.instance.useFunctionsEmulator('localhost', 5001); // Porta padrão do Functions Emulator
-  // --- FIM DA CONFIGURAÇÃO DE EMULADORES ---
+  if (kDebugMode) { // Isso garante que os emuladores só serão usados em desenvolvimento
+    await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+    FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
+    // Se usar Functions:
+    // FirebaseFunctions.instance.useFunctionsEmulator('localhost', 5001);
+  }
 
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -39,6 +38,8 @@ class MyApp extends StatelessWidget {
 
 // Exemplo de uma tela de autenticação simples para testar
 class AuthScreen extends StatefulWidget {
+  const AuthScreen({super.key});
+
   @override
   _AuthScreenState createState() => _AuthScreenState();
 }

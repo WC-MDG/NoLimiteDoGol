@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "80764980308",
+    "project_id": "nolimitedogol-95c3d",
+    "storage_bucket": "nolimitedogol-95c3d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:80764980308:android:f9a80db4876fe0b4c0b1c1",
+        "android_client_info": {
+          "package_name": "com.example.mercadodegols"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "80764980308-hotmujr30jf4lbjfg7qo8ba7k9bsiln0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbmpFv4CUjmdjON1ylVMURzye-u2kltdo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "80764980308-bt62jflltqkpika1he14v6qvrq8qsnvr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
