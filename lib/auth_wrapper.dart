@@ -9,6 +9,7 @@ import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 // Import your HomeScreen from its new location
 import 'home_screen.dart'; // Make sure this path is correct
 
+
 class AuthWrapper extends StatelessWidget {
   const AuthWrapper({super.key});
 
@@ -69,8 +70,24 @@ class AuthWrapper extends StatelessWidget {
           );
         }
 
-        // User is logged in, show the main application content
-        return const HomeScreen();
+        // Usuário LOGADO: Verificamos as Claims
+        final User user = snapshot.data!;
+
+        return FutureBuilder<IdTokenResult>(
+        future: user.getIdTokenResult(true), // Força o refresh para garantir claims
+        builder: (context, tokenSnapshot) {
+
+        if (tokenSnapshot.connectionState == ConnectionState.waiting) {
+          return const Scaffold(body: Center(child: CircularProgressIndicator()));
+        }
+
+          // Determina o status de Admin
+         final bool isAdmin = tokenSnapshot.data?.claims?['admin'] == true;
+
+        // Retorna a tela principal (HomeScreen), passando a permissão
+        return HomeScreen(isAdmin: isAdmin); // <<< CHAVE DA SOLUÇÃO
+          },
+        );
       },
     );
   }

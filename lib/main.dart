@@ -7,31 +7,34 @@ import 'package:flutter/foundation.dart'; // Para kDebugMode
 
 // Certifique-se de ter suas DefaultFirebaseOptions.
 import 'firebase_options.dart'; // Se você usa firebase_core configurado
+import 'auth_wrapper.dart';
 
 void main() async {
+  
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform, // Descomente se você estiver usando isso para produção
   );
 
   if (kDebugMode) { // Isso garante que os emuladores só serão usados em desenvolvimento
-    await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
-    FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
+    await FirebaseAuth.instance.useAuthEmulator('127.0.0.1', 9099);
+    FirebaseFirestore.instance.useFirestoreEmulator('127.0.0.1', 8080);
     // Se usar Functions:
     // FirebaseFunctions.instance.useFunctionsEmulator('localhost', 5001);
   }
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Meu App Firebase',
-      home: AuthScreen(), // Sua tela de autenticação
+      home: AuthWrapper(), // Sua tela de autenticação
     );
   }
 }

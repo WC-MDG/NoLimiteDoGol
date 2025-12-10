@@ -8,14 +8,15 @@ import 'match_one_screen.dart';
 
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final bool isAdmin;
+  const HomeScreen({super.key,required this.isAdmin});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // 1. Título do AppBar alterado para "Match Selection Screen"
-        title: const Text('Match Selection Screen'),
+        // 1. Título dinâmico
+        title: Text(isAdmin ? 'Admin Selection' : 'Match Selection'),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
@@ -30,6 +31,8 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            if (isAdmin)
+              const Text('Recursos de ADMIN disponíveis aqui.', style: TextStyle(color: Colors.red)),
             // 2. Removemos o texto "PARABÉNS! VOCÊ ESTÁ LOGADO!"
             // 3. Adicionamos um ElevatedButton no lugar do texto "Esta é a sua tela inicial."
             ElevatedButton(
@@ -37,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                 // Navega para a nova tela quando o botão for pressionado
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const MatchOneScreen()),
+                  MaterialPageRoute(builder: (context) => MatchOneScreen(isAdmin: isAdmin)),
                 );
               },
               child: const Text('Ir para a Seleção de Partida'), // Texto do botão

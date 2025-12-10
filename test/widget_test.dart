@@ -1,11 +1,16 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter/material.dart';
 
-import 'package:mercadodegols/main.dart';
+import 'package:mercadodegols/match_one_screen.dart';
 
 void main() {
   testWidgets('GameScreen loads and updates correctly', (WidgetTester tester) async {
     // Passa isAdmin: false para abrir o GameScreen
-    await tester.pumpWidget(const MyApp(isAdmin: false));
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: MatchOneScreen(isAdmin: false)
+      )
+    );
 
     // Verifica se o texto inicial da pontuação está na tela
     expect(find.text('Pontuação: 0'), findsOneWidget);
@@ -25,7 +30,11 @@ void main() {
   });
 
   testWidgets('AdminScreen loads when isAdmin true', (WidgetTester tester) async {
-    await tester.pumpWidget(const MyApp(isAdmin: true));
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: MatchOneScreen(isAdmin: true),
+      )
+    );
 
     // Verifica se o título "Administração" aparece
     expect(find.text('Administração'), findsOneWidget);
